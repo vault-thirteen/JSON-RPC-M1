@@ -8,8 +8,26 @@ import (
 	"github.com/vault-thirteen/auxie/tester"
 )
 
-//TODO
+func Test_NewClient(t *testing.T) {
+	aTest := tester.New(t)
+	var cs *ClientSettings
+	var c *Client
+	var err error
 
+	// Test #1. Error in settings.
+	cs = &ClientSettings{}
+	c, err = NewClient(cs)
+	aTest.MustBeAnError(err)
+
+	// Test #2. Normal settings.
+	cs, err = NewClientSettings("http", "localhost", 80, "/", nil, nil, true)
+	aTest.MustBeNoError(err)
+	c, err = NewClient(cs)
+	aTest.MustBeNoError(err)
+	aTest.MustBeEqual(c.requestsCount.String(), "0")
+}
+
+// TODO
 func Test_x(t *testing.T) {
 	aTest := tester.New(t)
 	var cs *ClientSettings
