@@ -7,8 +7,8 @@ root path (`http://localhost:80/`).
 
 Two RPC functions are available: `Sum` and `Crash`. 
 
-This simple example can also be used for primitive manual unit testing of the 
-framework.
+This simple example can also be used for primitive automatic and manual unit 
+testing of the framework.
 
 ## Simple Testing 
 
