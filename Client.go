@@ -153,7 +153,7 @@ func (c *Client) call(ctx context.Context, rpcReq *RpcRequest) (rpcResp *RpcResp
 
 // newHttpRequest takes an RPC request object and creates an HTTP request for
 // the RPC server.
-func (c *Client) newHttpRequest(ctx context.Context, rpcReq any) (hr *http.Request, err error) {
+func (c *Client) newHttpRequest(ctx context.Context, rpcReq *RpcRequest) (hr *http.Request, err error) {
 	var buf bytes.Buffer
 	enc := json.NewEncoder(&buf)
 	enc.SetIndent("", "\t")
