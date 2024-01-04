@@ -11,7 +11,12 @@ import (
 	"github.com/vault-thirteen/auxie/tester"
 )
 
-func Test_Call(t *testing.T) {
+// This file tests two public functions of the client: Call and CallRaw.
+// It uses the provided simple example as an RPC server to emulate responses.
+// This test can be considered as a simple automated unit test.
+// For manual unit tests, see a description of the simple example.
+
+func Test_Client_Call(t *testing.T) {
 	aTest := tester.New(t)
 
 	srvApp, err := a.NewApplication()
@@ -43,7 +48,7 @@ func Test_Call(t *testing.T) {
 	aTest.MustBeEqual(res, &s.SumResult{C: 3})
 }
 
-func Test_CallRaw(t *testing.T) {
+func Test_Client_CallRaw(t *testing.T) {
 	aTest := tester.New(t)
 
 	srvApp, err := a.NewApplication()
