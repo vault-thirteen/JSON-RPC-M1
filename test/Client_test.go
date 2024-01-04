@@ -3,11 +3,11 @@ package test
 import (
 	"context"
 	"encoding/json"
-	"github.com/vault-thirteen/JSON-RPC-M1/example/simple/s"
 	"testing"
 
 	"github.com/vault-thirteen/JSON-RPC-M1"
 	"github.com/vault-thirteen/JSON-RPC-M1/example/simple/a"
+	"github.com/vault-thirteen/JSON-RPC-M1/example/simple/s"
 	"github.com/vault-thirteen/auxie/tester"
 )
 
