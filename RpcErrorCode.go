@@ -56,3 +56,8 @@ func (rec RpcErrorCode) IsGeneratedByUser() bool {
 
 	return false
 }
+
+// Int returns RPC error code as an integer number.
+func (rec RpcErrorCode) Int() int {
+	return int(rec)
+}

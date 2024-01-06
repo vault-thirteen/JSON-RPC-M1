@@ -112,3 +112,12 @@ func Test_RpcErrorCode_IsGeneratedByUser(t *testing.T) {
 	}
 	fmt.Println()
 }
+
+func Test_RpcErrorCode_Int(t *testing.T) {
+	aTest := tester.New(t)
+	var rec RpcErrorCode
+
+	// Test.
+	rec = RpcErrorCode(123)
+	aTest.MustBeEqual(rec.Int(), 123)
+}
