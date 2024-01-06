@@ -127,3 +127,26 @@ func _newRpcErrorByUserWrapper(f func(code int, message string, data any) (re *R
 
 	return re, false
 }
+
+func Test_RpcError_AsError(t *testing.T) {
+	aTest := tester.New(t)
+	var re *RpcError
+	var res *RpcErrorStd
+
+	// Test #1. Not null.
+	re = &RpcError{
+		Code:    1,
+		Message: "One",
+		Data:    true,
+	}
+	res = re.AsError()
+	aTest.MustBeDifferent(res, (*RpcErrorStd)(nil))
+	aTest.MustBeEqual(res.Code, re.Code)
+	aTest.MustBeEqual(res.Message, re.Message)
+	aTest.MustBeEqual(res.Data, re.Data)
+
+	// Test #2. Null.
+	re = nil
+	res = re.AsError()
+	aTest.MustBeEqual(res, (*RpcErrorStd)(nil))
+}

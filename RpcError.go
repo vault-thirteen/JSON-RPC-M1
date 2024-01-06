@@ -81,3 +81,12 @@ func NewRpcErrorByUser(code int, message string, data any) (re *RpcError) {
 
 	return re
 }
+
+// AsError returns an RPC error as a standard error.
+func (re *RpcError) AsError() *RpcErrorStd {
+	if re == nil {
+		return nil
+	}
+
+	return NewRpcErrorStd(re.Code, re.Message, re.Data)
+}
