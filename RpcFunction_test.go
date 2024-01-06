@@ -11,7 +11,7 @@ import (
 type Sheisse struct {
 }
 
-func (s *Sheisse) TestFunction(params *json.RawMessage, metaData *ResponseMetaData) (result any, re *RpcError) {
+func (s *Sheisse) TestFunction(_ *json.RawMessage, _ *ResponseMetaData) (result any, re *RpcError) {
 	return
 }
 
