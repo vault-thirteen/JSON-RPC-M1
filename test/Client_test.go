@@ -36,6 +36,7 @@ func Test_Client_Call(t *testing.T) {
 	var c *jrm1.Client
 	c, err = jrm1.NewClient(cs)
 	aTest.MustBeNoError(err)
+	aTest.MustBeEqual(c.GetRequestsCount(), "0")
 
 	p := &s.SumParams{A: 1, B: 2}
 	res := new(s.SumResult)
@@ -46,6 +47,7 @@ func Test_Client_Call(t *testing.T) {
 
 	aTest.MustBeEqual(re, (*jrm1.RpcError)(nil))
 	aTest.MustBeEqual(res, &s.SumResult{C: 3})
+	aTest.MustBeEqual(c.GetRequestsCount(), "1")
 }
 
 func Test_Client_CallRaw(t *testing.T) {
@@ -68,6 +70,7 @@ func Test_Client_CallRaw(t *testing.T) {
 	var c *jrm1.Client
 	c, err = jrm1.NewClient(cs)
 	aTest.MustBeNoError(err)
+	aTest.MustBeEqual(c.GetRequestsCount(), "0")
 
 	pn := jrm1.ProtocolNameM1
 	id := "123"
@@ -90,4 +93,5 @@ func Test_Client_CallRaw(t *testing.T) {
 	aTest.MustBeEqual(rpcResp.Error, (*jrm1.RpcError)(nil))
 	aTest.MustBeEqual(rpcResp.Meta, &jrm1.ResponseMetaData{"dur": json.Number("0")})
 	aTest.MustBeEqual(rpcResp.OK, true)
+	aTest.MustBeEqual(c.GetRequestsCount(), "1")
 }

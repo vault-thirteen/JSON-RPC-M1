@@ -100,6 +100,7 @@ func (c *Client) CallRaw(ctx context.Context, rpcReq *RpcRequest) (rpcResp *RpcR
 	c.guard.Lock()
 	defer c.guard.Unlock()
 
+	c.incRequestsCount()
 	return c.call(ctx, rpcReq)
 }
 
