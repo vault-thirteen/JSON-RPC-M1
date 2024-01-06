@@ -13,7 +13,8 @@ import (
 const AsciiLowLine = '_'
 
 const (
-	ErrFBadSymbolInFunctionName = "bad symbol in function name: %v"
+	ErrFBadSymbolInFunctionName         = "bad symbol in function name: %v"
+	ErrFUnsupportedFormatOfFunctionName = "unsupported format of function name: %v"
 )
 
 // RpcFunction represents a signature for an RPC function (method, procedure).
@@ -36,7 +37,18 @@ type RpcFunction func(params *json.RawMessage, metaData *ResponseMetaData) (resu
 func (f RpcFunction) GetName() string {
 	fullName := runtime.FuncForPC(reflect.ValueOf(f).Pointer()).Name()
 	parts := strings.Split(fullName, ".")
-	return parts[len(parts)-1]
+	stageOneName := parts[len(parts)-1]
+
+	parts = strings.Split(stageOneName, "-")
+	switch len(parts) {
+	case 1:
+		return stageOneName
+	case 2:
+		return parts[0]
+	default:
+		err := fmt.Errorf(ErrFUnsupportedFormatOfFunctionName, stageOneName)
+		panic(err)
+	}
 }
 
 // CheckFunctionName verifies name of a function.

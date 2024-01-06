@@ -1,17 +1,34 @@
 package jrm1
 
 import (
+	"encoding/json"
 	"fmt"
 	"testing"
 
 	"github.com/vault-thirteen/auxie/tester"
 )
 
+type Sheisse struct {
+}
+
+func (s *Sheisse) TestFunction(params *json.RawMessage, metaData *ResponseMetaData) (result any, re *RpcError) {
+	return
+}
+
 func Test_RpcFunction_GetName(t *testing.T) {
 	aTest := tester.New(t)
+	var fname string
+
+	// Test #1.
 	rpcFn := RpcFunction(RpcFunctionExampleOne)
-	fname := rpcFn.GetName()
+	fname = rpcFn.GetName()
 	aTest.MustBeEqual(fname, "RpcFunctionExampleOne")
+
+	// Test #2.
+	shs := Sheisse{}
+	fn2 := RpcFunction(shs.TestFunction)
+	fname = fn2.GetName()
+	aTest.MustBeEqual(fname, "TestFunction")
 }
 
 func Test_CheckFunctionName(t *testing.T) {
