@@ -21,3 +21,12 @@ func Test_RpcErrorMessage_Check(t *testing.T) {
 	err = rem.Check()
 	aTest.MustBeAnError(err)
 }
+
+func Test_RpcErrorMessage_String(t *testing.T) {
+	aTest := tester.New(t)
+	var rem RpcErrorMessage
+
+	// Test.
+	rem = RpcErrorMessage("ABBA")
+	aTest.MustBeEqual(rem.String(), "ABBA")
+}

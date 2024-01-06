@@ -35,3 +35,8 @@ func (rem RpcErrorMessage) Check() (err error) {
 
 	return nil
 }
+
+// String returns RPC error message as a string.
+func (rem RpcErrorMessage) String() string {
+	return string(rem)
+}
