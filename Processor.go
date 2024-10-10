@@ -101,8 +101,8 @@ func (p *Processor) RemoveFunc(funcName string) (err error) {
 
 // FindFunc checks presence of the function in the RPC processor (server).
 func (p *Processor) FindFunc(funcName string) (err error) {
-	p.guard.Lock()
-	defer p.guard.Unlock()
+	p.guard.RLock()
+	defer p.guard.RUnlock()
 
 	_, exists := p.funcs[funcName]
 	if !exists {
