@@ -15,6 +15,10 @@ import (
 	"github.com/vault-thirteen/auxie/header"
 )
 
+const (
+	ErrInternalSelfCheck = "internal self check error"
+)
+
 // Client is an RPC client.
 type Client struct {
 	settings *ClientSettings
@@ -78,8 +82,11 @@ func (c *Client) Call(ctx context.Context, method string, params any, result any
 		return nil, err
 	}
 
-	// Get response error.
-	re = rawRpcResp.Error
+	// Internal self-check.
+	// Error flag and success flag must have opposite values.
+	if rawRpcResp.hasError() == rawRpcResp.OK {
+		return rawRpcResp.Error, errors.New(ErrInternalSelfCheck)
+	}
 
 	// Get response result.
 	if rawRpcResp.Result != nil {
@@ -92,7 +99,7 @@ func (c *Client) Call(ctx context.Context, method string, params any, result any
 		}
 	}
 
-	return re, nil
+	return rawRpcResp.Error, nil
 }
 
 // CallRaw takes a raw request, performs the request, returns a raw response.

@@ -35,3 +35,8 @@ type RpcResponseRaw struct {
 	// the HTTP status code 200, you will understand the idea.
 	OK bool `json:"ok"`
 }
+
+// hasError tells if the response finished with an error or not.
+func (r *RpcResponseRaw) hasError() bool {
+	return r.Error != nil
+}
