@@ -296,7 +296,7 @@ func Test_RpcHttpRequest_stopTimer(t *testing.T) {
 	time.Sleep(time.Second)
 	proceed = r.stopTimer()
 	aTest.MustBeEqual(proceed, false)
-	aTest.MustBeEqual(r.tDuration > int64(1000), true) // ms.
+	aTest.MustBeEqual(r.tDuration >= int64(1000), true) // ms.
 }
 
 func Test_RpcHttpRequest_respond(t *testing.T) {
