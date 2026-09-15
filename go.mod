@@ -1,8 +1,8 @@
 module github.com/vault-thirteen/JSON-RPC-M1
 
-go 1.26.7
+go 1.26.8
 
-require github.com/vault-thirteen/auxie v0.36.8
+require github.com/vault-thirteen/auxie v0.36.9
 
 require (
 	github.com/kr/pretty v0.3.1 // indirect
